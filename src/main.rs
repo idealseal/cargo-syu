@@ -64,9 +64,7 @@ pub fn read_install_root<P: AsRef<Path>>(path: P) -> Option<PathBuf> {
 /// Determine the path of `.crates.toml`.
 fn get_crates_files() -> anyhow::Result<PathBuf> {
     let cargo_root = home::cargo_home()?;
-    let install_root = std::fs::read_to_string(cargo_root.join("cargo.toml"))
-        .ok()
-        .and_then(|cargo_toml| read_install_root(&cargo_toml))
+    let install_root = read_install_root(cargo_root.join("config.toml"))
         // TODO: Handle absolute and current relative paths
         .and_then(|root| home::home_dir().map(|home| home.join(root)))
         .unwrap_or(cargo_root);
