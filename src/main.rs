@@ -108,7 +108,7 @@ fn main() -> anyhow::Result<()> {
     );
     packages.iter().for_each(|pkg| pkg.print_package(len));
 
-    if args.list {
+    if !args.list {
         for pkg in packages {
             pkg.update()?;
         }
