@@ -102,7 +102,7 @@ impl LocalPackage {
                 origin_commit,
             }),
             Self::Registry { name, vers, url } => {
-                fetch_registry_version(&url).map(|best_vers| Package::Registry {
+                fetch_registry_version(&url, &name).map(|best_vers| Package::Registry {
                     name,
                     vers,
                     url,
@@ -131,12 +131,22 @@ struct IndexEntry {
     vers: semver::Version,
 }
 
-fn fetch_registry_version(url: &str) -> anyhow::Result<semver::Version> {
+fn get_index_file(name: &str) -> String {
+    match name.len() {
+        1 => format!("1/{name}"),
+        2 => format!("2/{name}"),
+        3 => format!("3/{}/{name}", &name[..1]),
+        _ => format!("{}/{}/{name}", &name[..2], &name[2..4]),
+    }
+}
+
+fn fetch_registry_version(url: &str, name: &str) -> anyhow::Result<semver::Version> {
     let url = if url == "https://github.com/rust-lang/crates.io-index" {
         "https://index.crates.io"
     } else {
         url
     };
+    let url = format!("{url}/{}", get_index_file(name));
     let body = reqwest::blocking::get(url)?.text()?;
     let entry = body
         .lines()
