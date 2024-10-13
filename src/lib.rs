@@ -172,22 +172,24 @@ impl Package {
     }
 
     pub fn update(&self) -> anyhow::Result<()> {
-        match self {
-            Self::Git { name, url, .. } => {
-                Command::new("cargo")
-                    .arg("install")
-                    .arg("--git")
-                    .arg(url)
-                    .arg(name)
-                    .spawn()?
-                    .wait()?;
-            }
-            Self::Registry { name, .. } => {
-                Command::new("cargo")
-                    .arg("install")
-                    .arg(name)
-                    .spawn()?
-                    .wait()?;
+        if self.has_update() {
+            match self {
+                Self::Git { name, url, .. } => {
+                    Command::new("cargo")
+                        .arg("install")
+                        .arg("--git")
+                        .arg(url)
+                        .arg(name)
+                        .spawn()?
+                        .wait()?;
+                }
+                Self::Registry { name, .. } => {
+                    Command::new("cargo")
+                        .arg("install")
+                        .arg(name)
+                        .spawn()?
+                        .wait()?;
+                }
             }
         }
         Ok(())
