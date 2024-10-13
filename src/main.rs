@@ -85,7 +85,7 @@ fn main() -> anyhow::Result<()> {
         .filter_map(|pkg| pkg.fetch().ok())
         .collect::<Vec<_>>();
 
-    let len = std::cmp::min(
+    let len = std::cmp::max(
         packages
             .iter()
             .map(|pkg| match pkg {
@@ -95,6 +95,7 @@ fn main() -> anyhow::Result<()> {
             .unwrap_or(7),
         7, // Length of the string `Package`
     );
+    println!("{len}");
     if packages.is_empty() {
         return Ok(());
     }
