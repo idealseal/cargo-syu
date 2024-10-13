@@ -95,7 +95,6 @@ fn main() -> anyhow::Result<()> {
             .unwrap_or(7),
         7, // Length of the string `Package`
     );
-    println!("{len}");
     if packages.is_empty() {
         return Ok(());
     }
