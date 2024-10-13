@@ -9,6 +9,7 @@ use clap::{
     Parser,
 };
 use owo_colors::OwoColorize;
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
 
 /// `cargo`-like clap style.
 const STYLES: Styles = Styles::styled()
@@ -80,7 +81,7 @@ fn main() -> anyhow::Result<()> {
     }
 
     let packages = read_installed_packages(crates_file)?
-        .into_iter()
+        .into_par_iter()
         .filter(|pkg| args.git || matches!(pkg, LocalPackage::Registry { .. }))
         .filter_map(|pkg| pkg.fetch().ok())
         .collect::<Vec<_>>();
