@@ -2,10 +2,12 @@
 name = "cargo-syu"
 version = "0.1.0"
 edition = "2021"
-description = "cargo companion to keep packages up-to-date"
+description = "Update Rust binary crates"
 readme = "README.md"
 repository = "https://github.com/idealseal/cargo-syu"
 license = "MIT"
+keywords = ["cargo", "update"]
+categories = ["command-line-utilities", "development-tools::cargo-plugins"]
 
 [dependencies]
 anyhow = "1.0.89"
@@ -14,9 +16,9 @@ git2 = "0.19.0"
 home = "0.5.9"
 owo-colors = "4.1.0"
 rayon = "1.10.0"
-reqwest = { version = "0.12.8", features = [ "default-tls", "blocking", "http2"], default-features = false }
 semver = { version = "1.0.23", features = ["serde"] }
 serde = { version = "1.0.210", features = ["derive"] }
 serde_json = "1.0.128"
 tempfile = "3.13.0"
 toml = "0.8.19"
+ureq = "2.10.1"
