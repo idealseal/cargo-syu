@@ -22,7 +22,7 @@
 //! cargo syu --list
 //! ```
 //!
-//! Include git packages into consideration.
+//! Take git packages into consideration.
 //!
 //! ```console
 //! cargo syu --git
