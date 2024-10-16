@@ -3,7 +3,7 @@
 //! ## Installation
 //!
 //! ```console
-//! cargo install --git https://github.com/idealseal/cargo-syu
+//! cargo install --locked cargo-syu
 //! ```
 //!
 //! After that, the command can update itself.
