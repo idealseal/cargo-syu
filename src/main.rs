@@ -43,6 +43,7 @@
 //! - [ ] Allow printing of outdated packages only.
 //! - [ ] Add more code documentation.
 //! - [ ] Write unit and integration tests.
+//! - [ ] Add --ask flag to require user confirmation before installing packages.
 
 mod cli;
 
