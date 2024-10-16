@@ -1,7 +1,6 @@
 # Update Rust binary crates.
 
-[<img alt="Github" src="https://img.shields.io/badge/github-idealseal/cargo--syu-aaffff?style=flat-square&logo=Github" height="22">](https://github.com/idealseal/cargo-syu)
-[<img alt="Workflow Status" src="https://img.shields.io/github/actions/workflow/status/idealseal/cargo-syu/ci.yml?style=for-the-badge" height="22">](https://github.com/idealseal/cargo-syu/actions?query=branch%3Amaster)
+[<img alt="Workflow Status" src="https://img.shields.io/github/actions/workflow/status/idealseal/cargo-syu/ci.yml" height="20">](https://github.com/idealseal/cargo-syu/actions?query=branch%3Amaster)
 
 ## Installation
 
