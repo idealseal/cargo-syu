@@ -74,7 +74,8 @@ fn main() -> Result<()> {
     } else {
         None
     };
-    let cargo_install_root = cargo_install_root.unwrap_or(cargo_root);
+    let cargo_install_root =
+        cargo_install_root.map_or(cargo_root, |root| home::home_dir().unwrap().join(root));
 
     let crates_toml = cargo_install_root.join(".crates.toml");
     if !crates_toml.exists() {
