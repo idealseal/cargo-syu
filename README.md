@@ -1,4 +1,4 @@
-# Update Rust binary crates.
+# Update Rust binary crates
 
 [<img alt="Workflow Status" src="https://img.shields.io/github/actions/workflow/status/idealseal/cargo-syu/ci.yml" height="20">](https://github.com/idealseal/cargo-syu/actions?query=branch%3Amaster)
 
@@ -10,7 +10,7 @@ cargo install --locked cargo-syu
 
 After that, the command can update itself.
 
-## Examples
+## Usage
 
 The default operation is to list and update packages.
 

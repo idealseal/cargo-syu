@@ -8,7 +8,7 @@
 //!
 //! After that, the command can update itself.
 //!
-//! ## Examples
+//! ## Usage
 //!
 //! The default operation is to list and update packages.
 //!
