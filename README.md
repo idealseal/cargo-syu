@@ -1,6 +1,7 @@
 # Update Rust binary crates
 
-[<img alt="Workflow Status" src="https://img.shields.io/github/actions/workflow/status/idealseal/cargo-syu/ci.yml" height="20">](https://github.com/idealseal/cargo-syu/actions?query=branch%3Amaster)
+[<img alt="Workflow Status" src="https://img.shields.io/github/actions/workflow/status/idealseal/cargo-syu/.github%2Fworkflows%2Fci.yml?branch=master&logo=GitHub">](https://github.com/idealseal/cargo-syu/actions/workflows/ci.yml)
+[<img alt="Crates.io Version" src="https://img.shields.io/crates/v/cargo-syu?logo=rust">](https://crates.io/crates/cargo-syu)
 
 ## Installation
 
@@ -47,6 +48,10 @@ cargo syu --git
 - [ ] Write unit and integration tests.
 - [ ] Add --ask flag to require user confirmation before installing packages.
 
+<sub>
+
 ## License
 
-Licensed under the [MIT License](https://github.com/idealseal/cargo-syu/blob/master/LICENSE).
+Licensed under the [MIT License](./LICENSE).
+
+</sub>
