@@ -43,7 +43,7 @@
 //! - [ ] Allow printing of outdated packages only.
 //! - [ ] Add more code documentation.
 //! - [ ] Write unit and integration tests.
-//! - [ ] Add --ask flag to require user confirmation before installing packages.
+//! - [x] Add --ask flag to require user confirmation before installing packages.
 
 mod cli;
 
@@ -55,6 +55,7 @@ use std::sync::LazyLock;
 use anyhow::{bail, Context as _, Error, Result};
 use clap::Parser as _;
 use git2::{Direction, Repository};
+use inquire::prompt_confirmation;
 use owo_colors::OwoColorize as _;
 use rayon::iter::{IntoParallelIterator as _, ParallelIterator as _};
 use semver::Version;
@@ -131,6 +132,10 @@ fn main() -> Result<()> {
     crates.iter().for_each(|pkg| pkg.print(len));
 
     if args.list {
+        return Ok(());
+    }
+
+    if !crates.is_empty() && args.ask && prompt_confirmation("Install packages?").unwrap_or(false) {
         return Ok(());
     }
 
