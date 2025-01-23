@@ -1,6 +1,6 @@
 [package]
 name = "cargo-syu"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Update Rust binary crates"
 readme = "README.md"
