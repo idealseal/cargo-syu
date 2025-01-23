@@ -23,6 +23,10 @@ pub(crate) enum Cli {
 /// Update Rust binary crates.
 #[derive(clap::Args)]
 pub(crate) struct SyuArgs {
+    /// Ask before installing packages.
+    #[arg(short, long)]
+    pub(crate) ask: bool,
+
     /// Include packages installed with --git.
     #[arg(short, long)]
     pub(crate) git: bool,
