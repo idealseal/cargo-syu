@@ -135,7 +135,8 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
-    if !crates.is_empty() && args.ask && prompt_confirmation("Install packages?").unwrap_or(false) {
+    if !crates.is_empty() && args.ask && !prompt_confirmation("Install packages?").unwrap_or(false)
+    {
         return Ok(());
     }
 
