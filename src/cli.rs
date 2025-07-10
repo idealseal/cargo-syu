@@ -1,5 +1,5 @@
-use clap::builder::styling::{AnsiColor, Effects};
 use clap::builder::Styles;
+use clap::builder::styling::{AnsiColor, Effects};
 
 /// cargo-like help style messages.
 const STYLES: Styles = Styles::styled()

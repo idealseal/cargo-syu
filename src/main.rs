@@ -52,7 +52,7 @@ use std::path::PathBuf;
 use std::process::Command;
 use std::sync::LazyLock;
 
-use anyhow::{bail, Context as _, Error, Result};
+use anyhow::{Context as _, Error, Result, bail};
 use clap::Parser as _;
 use git2::{Direction, Repository};
 use inquire::prompt_confirmation;
@@ -245,7 +245,7 @@ impl Package {
                     "https://index.crates.io/{}",
                     get_registry_package_path(&name)
                 );
-                let body = ureq::get(&url).call()?.into_string()?;
+                let body = ureq::get(&url).call()?.body_mut().read_to_string()?;
 
                 let latest_entry = body
                     .lines()
@@ -416,39 +416,47 @@ mod tests {
 
     #[test]
     fn package_has_update() {
-        assert!(LatestPackage {
-            name: "".to_owned(),
-            upstream: LatestUpstream::Registry {
-                version: Version::new(1, 0, 0),
-                latest_version: Version::new(1, 0, 1),
-            },
-        }
-        .has_update());
-        assert!(!LatestPackage {
-            name: "".to_owned(),
-            upstream: LatestUpstream::Registry {
-                version: Version::new(1, 0, 0),
-                latest_version: Version::new(1, 0, 0),
-            },
-        }
-        .has_update());
-        assert!(LatestPackage {
-            name: "".to_owned(),
-            upstream: LatestUpstream::Git {
-                url: "".to_owned(),
-                commit: "ccd28e7939cf3feed230944cfc3a0498b98bddab".to_owned(),
-                latest_commit: "bb9f36d2fd022a089d39455d86d6c14e572628f1".to_owned()
-            },
-        }
-        .has_update());
-        assert!(!LatestPackage {
-            name: "".to_owned(),
-            upstream: LatestUpstream::Git {
-                url: "".to_owned(),
-                commit: "ccd28e7939cf3feed230944cfc3a0498b98bddab".to_owned(),
-                latest_commit: "ccd28e7939cf3feed230944cfc3a0498b98bddab".to_owned()
-            },
-        }
-        .has_update());
+        assert!(
+            LatestPackage {
+                name: "".to_owned(),
+                upstream: LatestUpstream::Registry {
+                    version: Version::new(1, 0, 0),
+                    latest_version: Version::new(1, 0, 1),
+                },
+            }
+            .has_update()
+        );
+        assert!(
+            !LatestPackage {
+                name: "".to_owned(),
+                upstream: LatestUpstream::Registry {
+                    version: Version::new(1, 0, 0),
+                    latest_version: Version::new(1, 0, 0),
+                },
+            }
+            .has_update()
+        );
+        assert!(
+            LatestPackage {
+                name: "".to_owned(),
+                upstream: LatestUpstream::Git {
+                    url: "".to_owned(),
+                    commit: "ccd28e7939cf3feed230944cfc3a0498b98bddab".to_owned(),
+                    latest_commit: "bb9f36d2fd022a089d39455d86d6c14e572628f1".to_owned()
+                },
+            }
+            .has_update()
+        );
+        assert!(
+            !LatestPackage {
+                name: "".to_owned(),
+                upstream: LatestUpstream::Git {
+                    url: "".to_owned(),
+                    commit: "ccd28e7939cf3feed230944cfc3a0498b98bddab".to_owned(),
+                    latest_commit: "ccd28e7939cf3feed230944cfc3a0498b98bddab".to_owned()
+                },
+            }
+            .has_update()
+        );
     }
 }
